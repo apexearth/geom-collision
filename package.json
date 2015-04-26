@@ -1,8 +1,12 @@
 {
   "name": "geom-collision",
   "description": "Geometry collision detection",
-  "repository": "https://github.com/apexearth/geom-collision",
+  "main": "geom-collision.js",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apexearth/geom-collision"
+  },
   "devDependencies": {
     "should": "^6.0.1"
   },

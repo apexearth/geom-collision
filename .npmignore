@@ -1,0 +1,6 @@
+.idea/
+references/
+tests/
+.gitignore
+.gitattributes
+.npmignore

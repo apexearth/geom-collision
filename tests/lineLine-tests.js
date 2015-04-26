@@ -12,7 +12,7 @@ describe('lineLine', function () {
         );
 
         i.should.not.equal(null);
-        i.result.should.equal("intersect");
+        i.result.should.equal(collision.INTERSECT);
         i.x.should.equal(0);
         i.y.should.equal(0);
     });
@@ -26,7 +26,7 @@ describe('lineLine', function () {
         );
 
         i.should.not.equal(null);
-        i.result.should.equal("none");
+        i.result.should.equal(collision.OUTSIDE);
     });
 
     it('parallel', function () {
@@ -38,7 +38,7 @@ describe('lineLine', function () {
         );
 
         i.should.not.equal(null);
-        i.result.should.equal("parallel");
+        i.result.should.equal(collision.PARALLEL);
     });
 
     it('parallel, almost coinciding 1', function () {
@@ -50,7 +50,7 @@ describe('lineLine', function () {
         );
 
         i.should.not.equal(null);
-        i.result.should.equal("parallel");
+        i.result.should.equal(collision.PARALLEL);
     });
     it('parallel, almost coinciding 2', function () {
         var i = collision.lineLine(
@@ -61,7 +61,7 @@ describe('lineLine', function () {
         );
 
         i.should.not.equal(null);
-        i.result.should.equal("parallel");
+        i.result.should.equal(collision.PARALLEL);
     });
     it('parallel, almost coinciding 3', function () {
         var i = collision.lineLine(
@@ -72,7 +72,7 @@ describe('lineLine', function () {
         );
 
         i.should.not.equal(null);
-        i.result.should.equal("parallel");
+        i.result.should.equal(collision.PARALLEL);
     });
     it('parallel, almost coinciding 4', function () {
         var i = collision.lineLine(
@@ -83,7 +83,7 @@ describe('lineLine', function () {
         );
 
         i.should.not.equal(null);
-        i.result.should.equal("parallel");
+        i.result.should.equal(collision.PARALLEL);
     });
 
 
@@ -98,7 +98,7 @@ describe('lineLine', function () {
         i.should.not.equal(null);
         i.x.should.equal(Infinity);
         i.y.should.equal(Infinity);
-        i.result.should.equal("coincide")
+        i.result.should.equal(collision.COINCIDE)
     });
 
     it('partial coincide', function () {
@@ -112,7 +112,7 @@ describe('lineLine', function () {
         i.should.not.equal(null);
         i.x.should.equal(Infinity);
         i.y.should.equal(Infinity);
-        i.result.should.equal("coincide")
+        i.result.should.equal(collision.COINCIDE)
     });
 
 });

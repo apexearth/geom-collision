@@ -1,9 +1,19 @@
 var lerp = require("lerp");
 
-module.exports = {
+var collision = module.exports = {
     lineLine: lineLine,
-    lineCircle: lineCircle
+    lineCircle: lineCircle,
+    pointRectangleSimple: pointRectangleSimple,
+    rectangleRectangleSimple: rectangleRectangleSimple,
+
+    INTERSECT: "intersect",
+    INSIDE: "inside",
+    OUTSIDE: "outside",
+    COINCIDE: "coincide",
+    PARALLEL: "parallel",
+    TANGENT: "tangent"
 };
+
 
 function lineLine(a1, a2, b1, b2) {
     var b2b1X = b2.x - b1.x;
@@ -27,12 +37,12 @@ function lineLine(a1, a2, b1, b2) {
                 return {
                     x: Infinity,
                     y: Infinity,
-                    result: "coincide"
+                    result: collision.COINCIDE
                 };
             }
         }
         return {
-            result: "parallel"
+            result: collision.PARALLEL
         };
     }
 
@@ -43,11 +53,11 @@ function lineLine(a1, a2, b1, b2) {
         return {
             x: a1.x + ua * a2a1X,
             y: a1.y + ua * a2a1Y,
-            result: "intersect"
+            result: collision.INTERSECT
         };
     }
     return {
-        result: "none"
+        result: collision.OUTSIDE
     };
 }
 
@@ -64,9 +74,9 @@ function lineCircle(a1, a2, c, r) {
 
     var result = {entry: null, exit: null, result: null};
     if (deter < 0) {
-        result.result = "outside";
+        result.result = collision.OUTSIDE;
     } else if (deter == 0) {
-        result.result = "tangent";
+        result.result = collision.TANGENT;
         var u = ( -b) / ( 2 * a );
         result.tangent = {
             x: lerp(a1.x, a2.x, u),
@@ -80,12 +90,12 @@ function lineCircle(a1, a2, c, r) {
 
         if ((u1 < 0 || u1 > 1) && (u2 < 0 || u2 > 1)) {
             if ((u1 < 0 && u2 < 0) || (u1 > 1 && u2 > 1)) {
-                result.result = "outside";
+                result.result = collision.OUTSIDE;
             } else {
-                result.result = "inside";
+                result.result = collision.INSIDE;
             }
         } else {
-            result.result = "intersect";
+            result.result = collision.INTERSECT;
             if (0 <= u1 && u1 <= 1)
                 result.entry = {
                     x: lerp(a1.x, a2.x, u1),
@@ -99,4 +109,59 @@ function lineCircle(a1, a2, c, r) {
         }
     }
     return result;
+}
+
+
+/**
+ * Inclusive
+ * @returns {*}
+ */
+function pointRectangleSimple(p, a1, a2) {
+    if (!(a1.x > p.x ||
+        a2.x < p.x ||
+        a1.y > p.y ||
+        a2.y < p.y))
+        return {result: collision.INSIDE};
+    return {result: collision.OUTSIDE};
+}
+
+
+function rectangleRectangleSimple(a1, a2, b1, b2) {
+    if (a1.x > a2.x || a1.y > a2.y) {
+        var na1 = {
+            x: a1.x > a2.x ? a2.x : a1.x,
+            y: a1.y > a2.y ? a2.y : a1.y
+        };
+        var na2 = {
+            x: a1.x < a2.x ? a2.x : a1.x,
+            y: a1.y < a2.y ? a2.y : a1.y
+        };
+        a1 = na1;
+        a2 = na2;
+    }
+
+    if (b1.x > b2.x || b1.y > b2.y) {
+        var nb1 = {
+            x: b1.x > b2.x ? b2.x : b1.x,
+            y: b1.y > b2.y ? b2.y : b1.y
+        };
+        var nb2 = {
+            x: b1.x < b2.x ? b2.x : b1.x,
+            y: b1.y < b2.y ? b2.y : b1.y
+        };
+        b1 = nb1;
+        b2 = nb2;
+    }
+
+    if (!(a1.x > b2.x ||
+        a2.x < b1.x ||
+        a1.y > b2.y ||
+        a2.y < b1.y)) {
+        return {
+            result: collision.INTERSECT
+        };
+    }
+    return {
+        result: collision.OUTSIDE
+    };
 }

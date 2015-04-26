@@ -12,7 +12,7 @@ describe('lineCircle', function () {
         );
 
         i.should.not.equal(null);
-        i.result.should.equal("inside");
+        i.result.should.equal(collision.INSIDE);
         should.equal(i.entry, null);
         should.equal(i.exit, null);
     });
@@ -26,7 +26,7 @@ describe('lineCircle', function () {
         );
 
         i.should.not.equal(null);
-        i.result.should.equal("outside");
+        i.result.should.equal(collision.OUTSIDE);
         should.equal(i.entry, null);
         should.equal(i.exit, null);
     });
@@ -40,7 +40,7 @@ describe('lineCircle', function () {
         );
 
         i.should.not.equal(null);
-        i.result.should.equal("intersect");
+        i.result.should.equal(collision.INTERSECT);
         i.entry.should.not.equal(null);
         i.exit.should.not.equal(null);
     });
@@ -54,7 +54,7 @@ describe('lineCircle', function () {
         );
 
         i.should.not.equal(null);
-        i.result.should.equal("tangent");
+        i.result.should.equal(collision.TANGENT);
         i.tangent.should.not.equal(null);
         i.tangent.x.should.equal(4);
         i.tangent.y.should.equal(0);

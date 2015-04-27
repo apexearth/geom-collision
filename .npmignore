@@ -4,3 +4,4 @@ tests/
 .gitignore
 .gitattributes
 .npmignore
+*.tgz

@@ -1,5 +1,5 @@
 var should = require("should");
-var collision = require("../geom-collision");
+var collision = require("../src");
 
 describe('pointRectangleSimple', function () {
 

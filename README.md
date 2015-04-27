@@ -1,11 +1,12 @@
 # geom-collision
-####Geometry Collision Detection
+#### Geometry Collision Detection
 
 This library has some useful collision detection methods.
 
     var collision = require("geom-collision");
-  
-###lineLine: function (a1, a2, b1, b2)
+
+### lineLine: function (a1, a2, b1, b2)
+
     var output = collision.lineLine(
         {x: 0, y: -2},   // Line 1 start
         {x: 0, y: 2},    // Line 1 stop
@@ -16,8 +17,9 @@ This library has some useful collision detection methods.
     // output.result == collision.INTERSECT == "intersect";
     // output.x == 0;
     // output.y == 0;
-    
-###lineCircle: (a1, a2, c, r)
+
+### lineCircle: (a1, a2, c, r)
+
     var output = collision.lineCircle(
         {x: 3, y: -4},
         {x: 3, y: 4},
@@ -30,8 +32,9 @@ This library has some useful collision detection methods.
     // output.entry.y == 2.6457513110645907;
     // output.exit.x == 3;
     // output.exit.y == -2.6457513110645907;
-    
-###pointRectangleSimple
+
+### pointRectangleSimple
+
     var output = collision.pointRectangleSimple(
         {x: 0, y: 0},
         {x: 0, y: 0},
@@ -39,8 +42,9 @@ This library has some useful collision detection methods.
     );
 
     // output.result == collision.INSIDE == "inside";
-    
-###rectangleRectangleSimple
+
+### rectangleRectangleSimple
+
     var output = collision.rectangleRectangleSimple(
         {x: 2, y: 1},
         {x: 0, y: 0},
@@ -49,7 +53,7 @@ This library has some useful collision detection methods.
     );
 
     // output.result == collision.INTERSECT == "intersect";
-    
+
 ### output.result types
 * **INTERSECT**: "intersect"
 * **INSIDE**: "inside"

@@ -45,6 +45,13 @@ describe('lineCircle', function () {
         i.entry.y.should.equal(2.6457513110645907);
         i.exit.x.should.equal(3);
         i.exit.y.should.equal(-2.6457513110645907);
+
+        i.intersections.length.should.equal(2);
+        i.intersections[0].x.should.equal(3);
+        i.intersections[0].y.should.equal(2.6457513110645907);
+        i.intersections[1].x.should.equal(3);
+        i.intersections[1].y.should.equal(-2.6457513110645907);
+
     });
 
     it('tangent', function () {

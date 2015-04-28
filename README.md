@@ -1,6 +1,8 @@
 # geom-collision
 #### Geometry Collision Detection
 
+[![Build Status](https://travis-ci.org/apexearth/geom-collision.svg)](https://travis-ci.org/apexearth/geom-collision)
+
 This library has some useful collision detection methods.
 
 ```js

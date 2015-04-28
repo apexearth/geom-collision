@@ -2,7 +2,7 @@
   "name": "geom-collision",
   "description": "2d collision detection library",
   "main": "./src/index.js",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/apexearth/geom-collision"

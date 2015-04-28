@@ -51,6 +51,32 @@ var output = collision.pointRectangleSimple(
 // output.result == collision.INSIDE == "inside";
 ```
 
+### rectangleCircleSimple
+
+```js
+var output = collision.rectangleCircleSimple(
+    {x: -1, y: -1},
+    {x: 1, y: 1},
+    {x:.2, y: 0},
+    1.1
+);
+
+output.result.should.equal(collision.INTERSECT);
+output.intersections.length.should.equal(6);
+output.intersections[0].x.should.equal(0.6582575694955841);
+output.intersections[0].y.should.equal(1);
+output.intersections[1].x.should.equal(-0.2582575694955842);
+output.intersections[1].y.should.equal(1);
+output.intersections[2].x.should.equal(1);
+output.intersections[2].y.should.equal(0.754983443527075);
+output.intersections[3].x.should.equal(1);
+output.intersections[3].y.should.equal(-0.754983443527075);
+output.intersections[4].x.should.equal(0.6582575694955841);
+output.intersections[4].y.should.equal(-1);
+output.intersections[5].x.should.equal(-0.2582575694955842);
+output.intersections[5].y.should.equal(-1);
+```
+
 ### rectangleRectangleSimple
 
 ```js

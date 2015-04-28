@@ -1,5 +1,5 @@
 var should = require("should");
-var collision = require("../src");
+var collision = require("../../src/index");
 
 describe('pointRectangleSimple', function () {
 

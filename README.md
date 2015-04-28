@@ -9,7 +9,7 @@ This library has some useful collision detection methods.
 var collision = require("geom-collision");
 ```
 
-### lineLine: function (a1, a2, b1, b2)
+### lineLine (a1, a2, b1, b2)
 
 ```js
 var output = collision.lineLine(
@@ -24,7 +24,7 @@ var output = collision.lineLine(
 // output.y == 0;
 ```
 
-### lineCircle: (a1, a2, c, r)
+### lineCircle (a1, a2, c, r)
 
 ```js
 var output = collision.lineCircle(
@@ -41,7 +41,7 @@ var output = collision.lineCircle(
 // output.exit.y == -2.6457513110645907;
 ```
 
-### pointRectangleSimple
+### pointRectangleSimple (p1, a1, a2)
 
 ```js
 var output = collision.pointRectangleSimple(
@@ -53,7 +53,7 @@ var output = collision.pointRectangleSimple(
 // output.result == collision.INSIDE == "inside";
 ```
 
-### rectangleCircleSimple
+### rectangleCircleSimple (a1, a2, c1, r)
 
 ```js
 var output = collision.rectangleCircleSimple(
@@ -79,7 +79,7 @@ output.intersections[5].x.should.equal(-0.2582575694955842);
 output.intersections[5].y.should.equal(-1);
 ```
 
-### rectangleRectangleSimple
+### rectangleRectangleSimple (a1, a2, b1, b2)
 
 ```js
 var output = collision.rectangleRectangleSimple(

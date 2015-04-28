@@ -3,6 +3,7 @@ var lerp = require("lerp");
 var collision = module.exports = {
     lineLine: lineLine,
     lineCircle: lineCircle,
+    rectangleCircleSimple: rectangleCircleSimple,
     pointRectangleSimple: pointRectangleSimple,
     rectangleRectangleSimple: rectangleRectangleSimple,
 
@@ -72,7 +73,14 @@ function lineCircle(a1, a2, c, r) {
         2 * (c.x * a1.x + c.y * a1.y) - r * r;
     var deter = b * b - 4 * a * cc;
 
-    var result = {entry: null, exit: null, result: null};
+    var result = {
+        entry: null,
+        exit: null,
+        tangent: null,
+        intersections: [],
+        result: null
+    };
+
     if (deter < 0) {
         result.result = collision.OUTSIDE;
     } else if (deter == 0) {
@@ -96,16 +104,53 @@ function lineCircle(a1, a2, c, r) {
             }
         } else {
             result.result = collision.INTERSECT;
-            if (0 <= u1 && u1 <= 1)
+            if (0 <= u1 && u1 <= 1) {
                 result.entry = {
                     x: lerp(a1.x, a2.x, u1),
                     y: lerp(a1.y, a2.y, u1)
                 };
-            if (0 <= u2 && u2 <= 1)
+                result.intersections.push(result.entry);
+            }
+            if (0 <= u2 && u2 <= 1) {
                 result.exit = {
                     x: lerp(a1.x, a2.x, u2),
                     y: lerp(a1.y, a2.y, u2)
                 };
+                result.intersections.push(result.exit);
+            }
+        }
+    }
+    return result;
+}
+
+
+function rectangleCircleSimple(a1, a2, c, r) {
+    var results = [
+        lineCircle(a1, {x: a2.x, y: a1.y}, c, r),
+        lineCircle({x: a2.x, y: a1.y}, a2, c, r),
+        lineCircle({x: a1.x, y: a2.y}, {x: a2.x, y: a2.y}, c, r),
+        lineCircle({x: a1.x, y: a1.y}, {x: a1.x, y: a2.y}, c, r)
+    ];
+    var result = {
+        result: null,
+        intersections: [],
+        tangents: []
+    };
+    var i = 4;
+    while (i--) {
+        var currentResult = results[i];
+        if (result.result === null
+            || result.result === collision.INSIDE && currentResult.result === collision.INTERSECT
+            || result.result === collision.TANGENT && (currentResult.result === collision.INTERSECT || currentResult.result === collision.INSIDE)
+            || result.result === collision.OUTSIDE
+        )
+            result.result = currentResult.result;
+
+        if (currentResult.intersections.length > 0)
+            result.intersections = result.intersections.concat(currentResult.intersections);
+
+        if(currentResult.result === collision.TANGENT) {
+            result.tangents.push(currentResult.tangent);
         }
     }
     return result;

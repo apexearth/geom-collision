@@ -15,7 +15,6 @@ var collision = module.exports = {
     TANGENT: 'tangent'
 };
 
-
 function lineLine(a1, a2, b1, b2) {
     var b2b1X = b2.x - b1.x;
     var b2b1Y = b2.y - b1.y;
@@ -24,8 +23,8 @@ function lineLine(a1, a2, b1, b2) {
     var ab1X = a1.x - b1.x;
     var ab1Y = a1.y - b1.y;
 
-    var u_b = b2b1Y * a2a1X - b2b1X * a2a1Y;
-    if (u_b == 0) {
+    var u = b2b1Y * a2a1X - b2b1X * a2a1Y;
+    if (u === 0) {
         if ((b2b1X * ab1Y - b2b1Y * ab1X) === 0 ||
             (a2a1X * ab1Y - a2a1Y * ab1X) === 0) {
 
@@ -47,8 +46,8 @@ function lineLine(a1, a2, b1, b2) {
         };
     }
 
-    var ua = (b2b1X * ab1Y - b2b1Y * ab1X) / u_b;
-    var ub = (a2a1X * ab1Y - a2a1Y * ab1X) / u_b;
+    var ua = (b2b1X * ab1Y - b2b1Y * ab1X) / u;
+    var ub = (a2a1X * ab1Y - a2a1Y * ab1X) / u;
 
     if (0 <= ua && ua <= 1 && 0 <= ub && ub <= 1) {
         return {
@@ -62,15 +61,19 @@ function lineLine(a1, a2, b1, b2) {
     };
 }
 
-
 function lineCircle(a1, a2, c, r) {
     var a2a1x = (a2.x - a1.x);
     var a2a1y = (a2.y - a1.y);
     var a = a2a1x * a2a1x + a2a1y * a2a1y;
     var a1cx = (a1.x - c.x);
-    var b = 2 * ( a2a1x * a1cx + a2a1y * (a1.y - c.y) );
-    var cc = c.x * c.x + c.y * c.y + a1.x * a1.x + a1.y * a1.y -
-        2 * (c.x * a1.x + c.y * a1.y) - r * r;
+    var b = 2 * (a2a1x * a1cx + a2a1y * (a1.y - c.y));
+    var cc = c.x * c.x
+        + c.y * c.y
+        + a1.x * a1.x
+        + a1.y * a1.y
+        - 2 * (c.x * a1.x + c.y * a1.y)
+        - r * r;
+
     var deter = b * b - 4 * a * cc;
 
     var result = {
@@ -83,18 +86,17 @@ function lineCircle(a1, a2, c, r) {
 
     if (deter < 0) {
         result.result = collision.OUTSIDE;
-    } else if (deter == 0) {
+    } else if (deter === 0) {
         result.result = collision.TANGENT;
-        var u = ( -b) / ( 2 * a );
+        var u = -b / (2 * a);
         result.tangent = {
             x: lerp(a1.x, a2.x, u),
             y: lerp(a1.y, a2.y, u)
-        }
+        };
     } else {
         var e = Math.sqrt(deter);
-        var u1 = ( -b + e ) / ( 2 * a );
-        var u2 = ( -b - e ) / ( 2 * a );
-
+        var u1 = (-b + e) / (2 * a);
+        var u2 = (-b - e) / (2 * a);
 
         if ((u1 < 0 || u1 > 1) && (u2 < 0 || u2 > 1)) {
             if ((u1 < 0 && u2 < 0) || (u1 > 1 && u2 > 1)) {
@@ -123,7 +125,6 @@ function lineCircle(a1, a2, c, r) {
     return result;
 }
 
-
 function rectangleCircleSimple(a1, a2, c, r) {
     var results = [
         lineCircle(a1, {x: a2.x, y: a1.y}, c, r),
@@ -143,19 +144,19 @@ function rectangleCircleSimple(a1, a2, c, r) {
             || result.result === collision.INSIDE && currentResult.result === collision.INTERSECT
             || result.result === collision.TANGENT && (currentResult.result === collision.INTERSECT || currentResult.result === collision.INSIDE)
             || result.result === collision.OUTSIDE
-        )
+        ) {
             result.result = currentResult.result;
+        }
 
-        if (currentResult.intersections.length > 0)
+        if (currentResult.intersections.length > 0) {
             result.intersections = result.intersections.concat(currentResult.intersections);
-
-        if(currentResult.result === collision.TANGENT) {
+        }
+        if (currentResult.result === collision.TANGENT) {
             result.tangents.push(currentResult.tangent);
         }
     }
     return result;
 }
-
 
 /**
  * Inclusive
@@ -165,11 +166,11 @@ function pointRectangleSimple(p, a1, a2) {
     if (!(a1.x > p.x ||
         a2.x < p.x ||
         a1.y > p.y ||
-        a2.y < p.y))
+        a2.y < p.y)) {
         return {result: collision.INSIDE};
+    }
     return {result: collision.OUTSIDE};
 }
-
 
 function rectangleRectangleSimple(a1, a2, b1, b2) {
     if (a1.x > a2.x || a1.y > a2.y) {

@@ -11,8 +11,18 @@
     "test": "mocha --recursive"
   },
   "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-if": "^1.2.5",
+    "gulp-jscs": "^1.6.0",
+    "gulp-jshint": "^1.10.0",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-mocha": "^2.0.1",
+    "gulp-print": "^1.1.0",
+    "jscs": "^1.13.1",
+    "jshint-stylish": "^1.0.1",
     "mocha": "^2.2.4",
-    "should": "^6.0.1"
+    "should": "^6.0.1",
+    "yargs": "^3.8.0"
   },
   "dependencies": {
     "lerp": "^1.0.3"

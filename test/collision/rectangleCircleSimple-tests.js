@@ -53,7 +53,7 @@ describe('rectangleCircleSimple', function () {
         var i = collision.rectangleCircleSimple(
             {x: -1, y: -1},
             {x: 1, y: 1},
-            {x:.2, y: 0},
+            {x: 0.2, y: 0},
             1.1
         );
 

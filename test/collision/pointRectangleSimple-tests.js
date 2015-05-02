@@ -102,5 +102,4 @@ describe('pointRectangleSimple', function () {
         i.result.should.equal(collision.OUTSIDE);
     });
 
-
 });

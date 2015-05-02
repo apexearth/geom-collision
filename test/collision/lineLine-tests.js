@@ -86,7 +86,6 @@ describe('lineLine', function () {
         i.result.should.equal(collision.PARALLEL);
     });
 
-
     it('identical / coincide', function () {
         var i = collision.lineLine(
             {x: 0, y: -2},
@@ -98,7 +97,7 @@ describe('lineLine', function () {
         i.should.not.equal(null);
         i.x.should.equal(Infinity);
         i.y.should.equal(Infinity);
-        i.result.should.equal(collision.COINCIDE)
+        i.result.should.equal(collision.COINCIDE);
     });
 
     it('partial coincide', function () {
@@ -112,7 +111,7 @@ describe('lineLine', function () {
         i.should.not.equal(null);
         i.x.should.equal(Infinity);
         i.y.should.equal(Infinity);
-        i.result.should.equal(collision.COINCIDE)
+        i.result.should.equal(collision.COINCIDE);
     });
 
 });

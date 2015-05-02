@@ -1,4 +1,4 @@
-var lerp = require("lerp");
+var lerp = require('lerp');
 
 var collision = module.exports = {
     lineLine: lineLine,
@@ -7,12 +7,12 @@ var collision = module.exports = {
     pointRectangleSimple: pointRectangleSimple,
     rectangleRectangleSimple: rectangleRectangleSimple,
 
-    INTERSECT: "intersect",
-    INSIDE: "inside",
-    OUTSIDE: "outside",
-    COINCIDE: "coincide",
-    PARALLEL: "parallel",
-    TANGENT: "tangent"
+    INTERSECT: 'intersect',
+    INSIDE: 'inside',
+    OUTSIDE: 'outside',
+    COINCIDE: 'coincide',
+    PARALLEL: 'parallel',
+    TANGENT: 'tangent'
 };
 
 

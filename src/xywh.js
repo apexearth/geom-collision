@@ -1,7 +1,7 @@
 /**
  * Wrapper for certain geom-collision methods to use objects containing x, y, width, height.
  */
-var collision = require("./collision");
+var collision = require('./collision');
 module.exports = {
     rectangleRectangleSimple: rectangleRectangleSimple,
 

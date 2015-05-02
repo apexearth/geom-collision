@@ -1,5 +1,5 @@
-var should = require("should");
-var collision = require("../../src").xywh;
+var should = require('should');
+var collision = require('../../src').xywh;
 
 describe('rectangleRectangleSimple', function () {
 

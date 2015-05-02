@@ -1,5 +1,5 @@
-var should = require("should");
-var collision = require("../../src/index");
+var should = require('should');
+var collision = require('../../src/index');
 
 describe('rectangleCircleSimple', function () {
 
